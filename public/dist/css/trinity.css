@@ -1,0 +1,185 @@
+.no-zh-cn{
+    ime-mode:disabled
+}
+.btn-info {
+    border-color: #00c0ef;
+}
+.btn-info:hover,.btn-info:active {
+    border-color:#00acd6;
+}
+.btn-primary,
+.btn-primary:focus {
+    background-color: #0ac9af;
+    border-color: #0ac9af;
+}
+.btn-primary:hover {
+    background-color: #00b89e;
+    border-color: #00b89e;
+}
+.btn-warning {
+    background-color: #f69f15;
+    border-color: #f69f15;
+}
+.btn-warning.active,
+.btn-warning.focus,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+    background-color: #e89107;
+    border-color: #e89107;
+}
+table.table-bordered.dataTable {
+    border-collapse: collapse !important;
+}
+#menuSel:focus {
+    border: 1px solid #d2d6de;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #fff;
+}
+#menuContent {
+    display:none;
+    position: absolute;
+    width:400px;
+    border: 1px solid #d2d6de;
+    border-top: none;
+    background-color: #fff;
+    z-index: 9999;
+}
+#menu-tree {
+    border:1px solid #ee6e73;
+    margin: 4px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 0 10px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #ee6e73;
+    border-color: #ee6e73;
+}
+#menu_tree .level2.curSelectedNode {
+    background-color: #ee6e73;
+    color: #fff;
+    font-weight: 600;
+}
+#menu_tree li.active > a {
+    color: #444;
+    font-weight: 500;
+}
+#menu_tree ul.level0 {
+    background: #f4f4f5 none repeat scroll 0 0;
+    display: block;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0 0 0 5px;
+}
+#menu_tree a.level1 {
+    display: block;
+    font-size: 14px;
+    padding: 5px 5px 5px 38px;
+}
+#menu_tree ul.level1 {
+    display: block;
+    padding-left: 20px;
+}
+#menu_tree .noline_close + a.level0 {
+    background-color: #f9fafc;
+}
+#menu_tree ul ul > li {
+    margin: 0;
+}
+#menu_tree ul ul {
+    list-style: outside none none;
+    margin: 0;
+}
+#menu_tree ul ul > li > a {
+    color: #777;
+    font-size: 14px;
+    position: relative;
+    display: block;
+    font-size: 14px;
+    padding: 5px 5px 5px 38px;
+}
+.box.box-primary {
+    border-top-color: #0ac9af;
+}
+.box-primary h4.box-title {
+    font-size: 14px;
+}
+.box-primary a {
+    color: #0ac9af;
+}
+.box-primary a:hover {
+    color: #00b89e;
+}
+.box-primary .form-control:focus {
+    border-color: #0ac9af;
+}
+label {
+    padding-right: 10px;
+}
+.datepicker {
+    margin-top: 0;
+    z-index: 9999;
+}
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #fff;
+}
+.hljs {
+    padding-left: 0;
+}
+.sidebar-collapse .slimScrollDiv {
+    width: 50px;
+}
+.sidebar-collapse .sidebar {
+    width: 50px;
+}
+.sidebar-collapse .sidebar-menu {
+    width: 50px;
+}
+.sidebar-collapse #menu_tree > li > ul {
+    display: none !important;
+}
+button.multiselect {
+    text-align: left;
+}
+button.multiselect > b {
+    float: right;
+    margin-top: -11px;
+}
+.multiselect-container.dropdown-menu .active > a {
+    background-color: #fff;
+    color: #777;
+}
+.multiselect-container.dropdown-menu .active > a:hover {
+    background-color: #e1e3e9;
+    color: #333;
+}
+.multiselect-container.dropdown-menu > li {
+    padding-left: 10px;
+}
+.multiselect-container.dropdown-menu li:hover {
+    background-color: #e1e3e9;
+}
+.multiselect-container {
+    border-radius: 0;
+    width: 100%;
+}
+.multiselect.btn-default {
+    background-color: #fff;
+}
+.btn-group.open .dropdown-toggle {
+    box-shadow: none;
+}
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background-color: #ee6e73;
+    border-color: #ee6e73;
+}
+
+/* Stype for tagsinput */
+.bootstrap-tagsinput {
+    border-color: #d2d6de;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+}

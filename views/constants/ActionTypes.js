@@ -1,0 +1,1 @@
+export const SEARCH_ASSETS = 'SEARCH_ASSETS'
