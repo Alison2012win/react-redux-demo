@@ -3,6 +3,7 @@ import TableContainer from './TableContainer'
 import SearchSelect from '../components/SearchSelect'
 import Modal from '../components/Modal'
 import { connect } from 'react-redux'
+import { save } from '../actionCreators'
 
 class Content extends Component {
   constructor(props) {
@@ -24,12 +25,7 @@ class Content extends Component {
 
   handleSave() {
     const { dispatch } = this.props
-    dispatch({
-      type: 'SAVE',
-      params: {
-        
-      }
-    })
+    dispatch(save())
   }
 
   render() {
@@ -54,7 +50,6 @@ class Content extends Component {
               </form>
               <TableContainer 
                 tableData={tableData}
-                handleSave={this.handleSave}
               />
             </div>
           </div>
@@ -63,6 +58,7 @@ class Content extends Component {
         <Modal 
           ifModal={ifModal}
           closeModal={this.closeModal}
+          handleSave={this.handleSave}
         />
       </div>
     )

@@ -10,7 +10,7 @@ var UserService = require('../service/user/userservice');
 var UserBO = require('../service/user/model/userbo');
 
 router.get('/', function(req, res) {
-    res.render('./components/App.js',{status:0});
+    res.render('../views/containers/App.js',{status:0});
 });
 
 module.exports = router;
