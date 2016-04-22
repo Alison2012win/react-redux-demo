@@ -18,8 +18,8 @@ class MenuContainer extends Component {
 
   changeMenu(index) {
     const { dispatch } = this.props
+    dispatch(getTableData(index))
     dispatch(changeMenu(index))
-    dispatch(getTableData())
   }
 
   render() {

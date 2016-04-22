@@ -15,9 +15,17 @@ class Table extends Component {
     
     const bodyHTML = bodyData.map(item => {
       const tdHTML = colInfo.map(col => {
-        return (
-          <td>{item[col]}</td>
-        )
+        console.log(colInfo.indexOf(col))
+        console.log(colInfo.length)
+        if(colInfo.indexOf(col) == colInfo.length-1){
+          return (
+            <td>{item[col]}</td>
+          )
+        } else {
+          return (
+            <a id="{item[col]}" href="javascript:;" data-toggle="tooltip" title="" data-original-title="编辑"><i class="fa fa-pencil text-aqua"></i></a>
+          )
+        }
       })
       return (
         <tr role="row" className="odd">

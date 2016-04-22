@@ -1,5 +1,5 @@
 const initialState = {
-  selectedMenu: 1,
+  selectedMenu: 0,
   menus: [{
     index: 0,
     name: '资源管理'
@@ -7,7 +7,7 @@ const initialState = {
     index: 1,
     name: '字典管理'
   }],
-  currentTable: 1,
+  currentTable: 0,
   tables: [{
     type: 0,
     name: 'asset',
@@ -33,13 +33,14 @@ const initialState = {
 export default function app(state = initialState, action) {
   switch (action.type) {
     case 'RECEIVE_TABLE_SUCCESS':
+      const index = action.index;
       return Object.assign({}, state, {
         tables: [
-          ...state.tables.slice(0, state.currentTable),
-          Object.assign({}, state.tables[state.currentTable], {
+          ...state.tables.slice(0, index),
+          Object.assign({}, state.tables[index], {
             item: action.data
           }),
-          ...state.tables.slice(state.currentTable + 1)
+          ...state.tables.slice(index + 1)
         ]
       })
     case 'CHANGE_MENU':

@@ -7,7 +7,7 @@ class TableContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(getTableData())
+    dispatch(getTableData(0))
   }
 
   render() {

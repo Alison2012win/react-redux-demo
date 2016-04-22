@@ -23,9 +23,10 @@ class Content extends Component {
     dispatch({type: 'CLOSE_MODAL'})
   }
 
-  handleSave() {
+  handleSave(params) {
+    console.log('params: ' + params)
     const { dispatch } = this.props
-    dispatch(save())
+    dispatch(save(params))
   }
 
   render() {
