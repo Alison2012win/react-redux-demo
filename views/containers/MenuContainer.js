@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Menu from '../components/Menu'
+import Menu from '../components/common/Menu'
 import { changeMenu, getTableData } from '../actionCreators'
 
 class MenuContainer extends Component {

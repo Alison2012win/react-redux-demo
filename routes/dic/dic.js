@@ -166,6 +166,21 @@ router.route('/:did')
             restmsg.setResult(ret);
             res.send(restmsg);
         });
+    })
+    .delete(function(req,res,next){ // 删除字典信息
+        var did = req.params.did;
+        var restmsg = new RestMsg();
+        DicService.remove(did,function(err,obj){
+            if (err) {
+                restmsg.errorMsg(err);
+                restmsg.setResult(null);
+                res.send(restmsg);
+                return;
+            }
+            restmsg.successMsg();
+            restmsg.setResult(null);
+            res.send(restmsg);
+        });
     });
 
 

@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-function receiveTable(json, index) {
-  console.log(json)
+export function receiveTable(json, index) {
   return {
     type: 'RECEIVE_TABLE_SUCCESS',
     data: json.result.data,
@@ -41,6 +40,7 @@ export function saveFetch(param) {
               alert(obj.msg);
             } else {
               alert('保存成功!');
+              getDicTypeSelect(dispatch);
               fetchTableData(dispatch, getState);
               dispatch({type: 'CLOSE_MODAL'});
             }
@@ -67,6 +67,7 @@ export function deleteFetch(id) {
               alert(obj.msg);
             } else {
               alert('删除成功!');
+              getDicTypeSelect(dispatch);
               fetchTableData(dispatch, getState);
             }
           })
@@ -81,5 +82,48 @@ export function changeMenu(index) {
   return {
     type: 'CHANGE_MENU', 
     index: index
+  }
+}
+
+export function openModal() {
+  return {
+    type: 'OPEN_MODAL'
+  }
+}
+
+export function closeModal() {
+  return {
+    type: 'CLOSE_MODAL'
+  }
+}
+
+export function organizeDicTypeSelect() {
+  return (dispatch ) => {
+    return getDicTypeSelect(dispatch)
+  }
+}
+
+function getDicTypeSelect(dispatch){
+  fetch('api/dics/total')
+    .then(response => response.json())
+    .then(json => {
+      if(json.code == 1){
+        dispatch(updateDicTypeSelectOptions(json.result.data))
+      }else {
+        alert('获取下拉选项失败！')
+      }
+    })
+}
+
+function updateDicTypeSelectOptions(data){
+  const typeArray = ['所有类型'];
+  data.map(item => {
+    if(typeArray.indexOf(item.type) < 0 ){
+      typeArray.push(item.type);
+    }
+  })
+  return {
+    type: 'DIC_SELECT_TYPE',
+    data: typeArray
   }
 }

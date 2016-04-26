@@ -126,4 +126,20 @@ DicService.update = function(bo,callback){
     });
 };
 
+/**
+ * 删除字典
+ * @param {id|_id}
+ * @param {callback|回调函数}
+ */
+DicService.remove = function(id,callback){
+    //物理删除
+    Dic.findOneAndRemove({_id:id},function (err, bo) {
+        if (err){
+            callback(err);
+            return console.error(err);
+        }
+        callback(null,bo);
+    });
+}
+
 module.exports = DicService; // 导出DicService模块

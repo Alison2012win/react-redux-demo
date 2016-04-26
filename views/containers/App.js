@@ -31,8 +31,8 @@ import '../../public/dist/plugins/input-mask/jquery.inputmask.extensions.js'*/
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Footer from '../components/common/Footer'
+import Header from '../components/common/Header'
 import MenuContainer from './MenuContainer'
 import Content from './Content'
 

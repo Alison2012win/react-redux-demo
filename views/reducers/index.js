@@ -1,5 +1,5 @@
 const initialState = {
-  selectedMenu: 0,
+  selectedMenu: 1,
   menus: [{
     index: 0,
     name: '资源管理'
@@ -7,7 +7,7 @@ const initialState = {
     index: 1,
     name: '字典管理'
   }],
-  currentTable: 0,
+  currentTable: 1,
   tables: [{
     type: 0,
     name: 'asset',
@@ -29,10 +29,11 @@ const initialState = {
     }]
   },{
     type: 1,
+    searchOptions:[],
     name: 'dic',
     url: '/api/dics/total',
     saveUrl: '/api/dics',
-    deleteUrl: 'api/dics/',
+    deleteUrl: '/api/dics/',
     params: {},
     header: ['字典类型', '字典码', '字典值', '操作'],
     colname: ['type', 'code', 'value', 'did'],
@@ -44,7 +45,8 @@ const initialState = {
     }]
   }],
   ifModal: false,
-  modalType: 'new'
+  modalType: 'new',
+  selectDicTypes: []
 }
 
 export default function app(state = initialState, action) {
@@ -72,6 +74,10 @@ export default function app(state = initialState, action) {
     case 'CLOSE_MODAL':
       return Object.assign({}, state, {
         ifModal: false
+      })
+    case 'DIC_SELECT_TYPE':
+      return Object.assign({}, state, {
+        selectDicTypes: action.data
       })
     default:
       return state
