@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 class Table extends Component {
   constructor(props) {
@@ -6,24 +6,30 @@ class Table extends Component {
   }
 
   render() {
-    const { headerData, bodyData, colInfo } = this.props
-    const headerHTML = headerData.map(item => {
+    const { tableData, handleDelete } = this.props
+
+    const headerHTML = tableData.header.map(item => {
       return (
         <th>{item}</th>
       )
     })
     
-    const bodyHTML = bodyData.map(item => {
-      const tdHTML = colInfo.map(col => {
-        console.log(colInfo.indexOf(col))
-        console.log(colInfo.length)
-        if(colInfo.indexOf(col) == colInfo.length-1){
+    const bodyHTML = tableData.item.map(item => {
+      const tdHTML = tableData.colname.map(col => {
+        if(tableData.colname.indexOf(col) == tableData.colname.length-1){
+          const optionHTML = tableData.options.map(option => {
+            return (
+              <a onClick={() => handleDelete(item[col])}>{option.type}&nbsp;</a>
+            )
+          })
           return (
-            <td>{item[col]}</td>
+            <td>
+              {optionHTML}
+            </td>
           )
         } else {
           return (
-            <a id="{item[col]}" href="javascript:;" data-toggle="tooltip" title="" data-original-title="编辑"><i class="fa fa-pencil text-aqua"></i></a>
+            <td>{item[col]}</td>
           )
         }
       })
@@ -48,5 +54,9 @@ class Table extends Component {
     )
   }
 }
+
+Table.propTypes = {
+  tableData: PropTypes.object.isRequired
+};
 
 export default Table;

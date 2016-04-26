@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import TableContainer from './TableContainer'
 import SearchSelect from '../components/SearchSelect'
 import Modal from '../components/Modal'
 import { connect } from 'react-redux'
-import { save } from '../actionCreators'
+import { getTableData, saveFetch, deleteFetch } from '../actionCreators'
+import Table from '../components/Table'
 
 class Content extends Component {
   constructor(props) {
@@ -11,10 +11,16 @@ class Content extends Component {
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(getTableData(0))
   }
 
   openModal() {
-    const { dispatch } = this.props
+    const { dispatch, currentTable } = this.props
     dispatch({type: 'OPEN_MODAL'})
   }
 
@@ -24,13 +30,17 @@ class Content extends Component {
   }
 
   handleSave(params) {
-    console.log('params: ' + params)
     const { dispatch } = this.props
-    dispatch(save(params))
+    dispatch(saveFetch(params))
+  }
+
+  handleDelete(id) {
+    const { dispatch } = this.props
+    dispatch(deleteFetch(id))
   }
 
   render() {
-    const { selectedMenu, tableData, ifModal } = this.props
+    const { selectedMenu, tableData, ifModal, currentTable } = this.props
     return (
       <div className="content-wrapper">
         <section className="content-header">
@@ -49,8 +59,9 @@ class Content extends Component {
                   <button className="btn btn-flat btn-primary" type="button" >重置</button>
                   <button className="btn btn-flat btn-danger pull-right" type="button" onClick={this.openModal}>新增</button>
               </form>
-              <TableContainer 
+              <Table
                 tableData={tableData}
+                handleDelete={this.handleDelete}
               />
             </div>
           </div>
@@ -58,6 +69,7 @@ class Content extends Component {
 
         <Modal 
           ifModal={ifModal}
+          currentTable={currentTable}
           closeModal={this.closeModal}
           handleSave={this.handleSave}
         />
@@ -70,7 +82,8 @@ function mapStateToProps(state) {
   return { 
     selectedMenu: state.menus[state.selectedMenu],
     tableData: state.tables[state.currentTable],
-    ifModal: state.ifModal
+    ifModal: state.ifModal,
+    currentTable: state.currentTable
   };
 }
 

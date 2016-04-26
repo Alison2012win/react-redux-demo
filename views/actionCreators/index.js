@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 function receiveTable(json, index) {
+  console.log(json)
   return {
     type: 'RECEIVE_TABLE_SUCCESS',
     data: json.result.data,
@@ -24,7 +25,7 @@ export function getTableData(index) {
   }
 }
 
-export function save(param) {
+export function saveFetch(param) {
   return (dispatch, getState) => {
     const url = getState().tables[getState().currentTable].saveUrl
     return fetch(url, {
@@ -48,7 +49,31 @@ export function save(param) {
           alert('错误代码： ' + res.status)
         }        
       });
+  }
+}
 
+export function deleteFetch(id) {
+  return (dispatch, getState) => {
+    const url = getState().tables[getState().currentTable].deleteUrl + id
+    return fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      }).then(function(response) {
+        if(response.ok){
+          response.json().then(function(obj) {
+            if(obj.code == -1){
+              alert(obj.msg);
+            } else {
+              alert('删除成功!');
+              fetchTableData(dispatch, getState);
+            }
+          })
+        } else {
+          alert('错误代码： ' + res.status)
+        }        
+      });
   }
 }
 

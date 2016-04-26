@@ -10,7 +10,7 @@ class Header extends Component {
       <header className="main-header">
         <span className="logo">
           <span className="logo-mini"><b>ITAM</b></span>
-          <span className="logo-lg"><b>IT资产</b> 管理系统</span>
+          <span className="logo-lg">IT资产 管理系统</span>
         </span>
         <nav className="navbar navbar-static-top">
           <a href="javascript:void(0);" className="sidebar-toggle" data-toggle="offcanvas"></a>

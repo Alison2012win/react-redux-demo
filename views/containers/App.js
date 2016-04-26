@@ -30,8 +30,6 @@ import '../../public/dist/plugins/input-mask/jquery.inputmask.extensions.js'*/
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import * as ActionCreators from '../actionCreators';
 
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -44,17 +42,15 @@ class App extends Component {
   }
 
   render() {
-    const { dispatch } = this.props
-    const boundActionCreators = bindActionCreators(ActionCreators, dispatch);
     return (
       <div class="wrapper">
         <Header />
         <MenuContainer />
-        <Content {...boundActionCreators} store={this.props.store}/>
+        <Content />
         <Footer />
       </div>
     )
   }
 }
 
-export default connect()(App)
+export default App

@@ -9,13 +9,6 @@ class MenuContainer extends Component {
     this.changeMenu = this.changeMenu.bind(this)
   }
 
-  // FIXME!!为什么在这里可以，但在changeMenu会报错
-  /*componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(changeMenu(0))
-    dispatch(getTableData())
-  }*/
-
   changeMenu(index) {
     const { dispatch } = this.props
     dispatch(getTableData(index))
@@ -33,6 +26,14 @@ class MenuContainer extends Component {
     )
   }
 }
+
+MenuContainer.propTypes = {
+  menus: PropTypes.arrayOf(PropTypes.shape({
+    index: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  })),
+  selectedMenu: PropTypes.number.isRequired
+};
 
 function mapStateToProps(state) {
   return { 

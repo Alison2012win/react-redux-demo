@@ -13,21 +13,38 @@ const initialState = {
     name: 'asset',
     url: '/api/assets',
     saveUrl: '/api/assets',
+    deleteUrl: '/api/assets/',
     params: {},
     header: ['服务器名称', '服务器IP', '所属节点', '类型', '负责人', '状态', '应用部署信息', '操作'],
     colname: ['name', 'ip', 'parentNode', 'type', 'admin', 'state', 'appsInfo', 'aid'],
-    item: []
+    item: [],
+    options: [{
+      type: '更新状态'
+    }, {
+      type: '详情'
+    }, {
+      type: '编辑'
+    }, {
+      type: '删除'
+    }]
   },{
     type: 1,
     name: 'dic',
     url: '/api/dics/total',
     saveUrl: '/api/dics',
+    deleteUrl: 'api/dics/',
     params: {},
     header: ['字典类型', '字典码', '字典值', '操作'],
     colname: ['type', 'code', 'value', 'did'],
-    item: []
+    item: [],
+    options: [{
+      type: '编辑'
+    }, {
+      type: '删除'
+    }]
   }],
-  ifModal: false
+  ifModal: false,
+  modalType: 'new'
 }
 
 export default function app(state = initialState, action) {
