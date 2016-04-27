@@ -1,66 +1,28 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import DicModal from '../pages/DicModal'
 
 class Modal extends Component {
   constructor(props) {
     super(props)
-    this.organizeParams = this.organizeParams.bind(this)
+    this.organizeDicParams = this.organizeDicParams.bind(this)
   }
 
-  organizeParams(){
+  organizeDicParams(){
     const { handleSave } = this.props
+    const id = ReactDOM.findDOMNode(this.refs.dicId).value
     const type = ReactDOM.findDOMNode(this.refs.dicType).value
     const code = ReactDOM.findDOMNode(this.refs.dicCode).value
     const value = ReactDOM.findDOMNode(this.refs.dicValue).value
-    handleSave("type=" + type + "&code=" + code + "&value=" + value)
+    handleSave("type=" + type + "&code=" + code + "&value=" + value, id)
   }
 
   render() {
-    const { ifModal, closeModal, currentTable } = this.props
+    const { ifModal, closeModal, currentTable, modalType, showData } = this.props
     if(currentTable == 1) {
       return (
         <div>
-          <div className="modal modal-danger" tabIndex="-1" style={{display: ifModal ? 'block' : 'none'}}>
-            <div className="modal-dialog" style={{width: '500px'}}>
-              <div className="modal-content">
-
-                <form method="post" action="api/dics" className="form-horizontal">
-                  <div className="modal-header">
-                    <button type="button" className="close" onClick={closeModal}>&times;</button>
-                    <h4 className="modal-title" id="dic-modal-title">新增字典</h4>
-                  </div>
-
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label className="col-sm-4 control-label">字典类型（必填）</label>
-                      <div className="col-sm-6">
-                        <input ref="dicType" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label className="col-sm-4 control-label">字典码（必填）</label>
-                      <div className="col-sm-6">
-                        <input ref="dicCode" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label className="col-sm-4 control-label">字典值（必填）</label>
-                      <div className="col-sm-6">
-                        <input ref="dicValue" className="form-control" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-outline btn-sm" onClick={closeModal}>取消</button>
-                    <button type="button" className="btn btn-outline btn-sm" onClick={this.organizeParams}>保存</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="modal-backdrop in" style={{display: ifModal ? 'block' : 'none'}}></div>
+          <
         </div>
       )
     } else {

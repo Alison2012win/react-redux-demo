@@ -4,13 +4,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../actionCreators'
 import SearchSelect from '../common/SearchSelect'
-import Modal from '../common/Modal'
+import DicModal from './DicModal'
 import Table from '../common/Table'
 
 class Assets extends Component {
   constructor(props) {
     super(props)
     this.searchDicTable = this.searchDicTable.bind(this)
+    this.handleModify = this.handleModify.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
   }
 
   componentDidMount() {
@@ -21,12 +23,22 @@ class Assets extends Component {
   searchDicTable(){
     const { actions } = this.props
     fetch('api/dics?type=' + ReactDOM.findDOMNode(this.refs.dicType).value )
-    .then(response => response.json())
-    .then(json => actions.receiveTable(json, 1))
+      .then(response => response.json())
+      .then(json => actions.receiveTable(json, 1))
+  }
+
+  handleModify(data){
+    const { actions } = this.props
+    actions.changeModalType('edit', data);
+  }
+
+  handleAdd(){
+    const { actions } = this.props
+    actions.changeModalType('new', {});
   }
 
   render() {
-    const { tableData, ifModal, currentTable, actions, selectDicTypes } = this.props
+    const { tableData, ifModal, modalType, actions, selectDicTypes, modalShowData } = this.props
     return (
       <div className="content-wrapper">
         <section className="content-header">
@@ -44,21 +56,24 @@ class Assets extends Component {
                   <button className="btn btn-flat btn-info" type="button" onClick={this.searchDicTable}>查询</button>
                   <button className="btn btn-flat btn-primary" type="reset">重置</button>
                   <button className="btn btn-flat btn-danger pull-right" 
-                    type="button" onClick={() => actions.openModal()}>新增</button>
+                    type="button" onClick={this.handleAdd}>新增</button>
               </form>
               <Table
                 tableData={tableData}
                 handleDelete={id => actions.deleteFetch(id)}
+                handleModify={this.handleModify}
+                tableType="dic"
               />
             </div>
           </div>
         </section>
 
-        <Modal 
+        <DicModal
           ifModal={ifModal}
-          currentTable={currentTable}
+          modalType={modalType}
+          showData={modalShowData}
           closeModal={() => actions.closeModal()}
-          handleSave={params => actions.saveFetch(params)}
+          handleSave={(params, id) => actions.saveFetch(params, id)}
         />
       </div>
     )
@@ -68,8 +83,9 @@ class Assets extends Component {
 function mapStateToProps(state) {
   return {
     ifModal: state.ifModal,
-    currentTable: state.currentTable,
-    selectDicTypes: state.selectDicTypes
+    selectDicTypes: state.selectDicTypes,
+    modalType: state.modalType,
+    modalShowData: state.modalShowData
   }
 }
 

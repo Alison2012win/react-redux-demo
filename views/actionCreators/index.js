@@ -1,32 +1,15 @@
 import fetch from 'isomorphic-fetch'
 
-export function receiveTable(json, index) {
-  return {
-    type: 'RECEIVE_TABLE_SUCCESS',
-    data: json.result.data,
-    index: index
-  }
-}
-
-function fetchTableData(dispatch, getState, index) {
-  if(!index) {
-    index = getState().currentTable;
-  }
-  const url = getState().tables[index].url
-  return fetch(url)
-    .then(response => response.json())
-    .then(json => dispatch(receiveTable(json, index)))
-}
-
-export function getTableData(index) {
+/* 新增、修改 */
+export function saveFetch(param, id) {
   return (dispatch, getState) => {
-    fetchTableData(dispatch, getState, index);
-  }
-}
-
-export function saveFetch(param) {
-  return (dispatch, getState) => {
-    const url = getState().tables[getState().currentTable].saveUrl
+    const modalType = getState().modalType
+    let url = ''
+    if(modalType == 'new'){
+      url = getState().tables[getState().currentTable].saveUrl
+    } else if(modalType == 'edit'){
+      url = getState().tables[getState().currentTable].saveUrl + '/' + id
+    }
     return fetch(url, {
         method: "POST",
         headers: {
@@ -37,7 +20,7 @@ export function saveFetch(param) {
         if(response.ok){
           response.json().then(function(obj) {
             if(obj.code == -1){
-              alert(obj.msg);
+              alert('保存出错： ' + obj.msg.message);
             } else {
               alert('保存成功!');
               getDicTypeSelect(dispatch);
@@ -52,6 +35,7 @@ export function saveFetch(param) {
   }
 }
 
+/* 删除 */
 export function deleteFetch(id) {
   return (dispatch, getState) => {
     const url = getState().tables[getState().currentTable].deleteUrl + id
@@ -78,6 +62,32 @@ export function deleteFetch(id) {
   }
 }
 
+/* 获取所有 */
+export function getTableData(index) {
+  return (dispatch, getState) => {
+    fetchTableData(dispatch, getState, index);
+  }
+}
+
+function fetchTableData(dispatch, getState, index) {
+  if(!index) {
+    index = getState().currentTable;
+  }
+  const url = getState().tables[index].url
+  return fetch(url)
+    .then(response => response.json())
+    .then(json => dispatch(receiveTable(json, index)))
+}
+
+export function receiveTable(json, index) {
+  return {
+    type: 'RECEIVE_TABLE_SUCCESS',
+    data: json.result.data,
+    index: index
+  }
+}
+
+/* 改变菜单 */
 export function changeMenu(index) {
   return {
     type: 'CHANGE_MENU', 
@@ -85,17 +95,20 @@ export function changeMenu(index) {
   }
 }
 
+/* 打开modal框 */
 export function openModal() {
   return {
     type: 'OPEN_MODAL'
   }
 }
 
+/* 关闭modal框 */
 export function closeModal() {
   return {
     type: 'CLOSE_MODAL'
   }
 }
+
 
 export function organizeDicTypeSelect() {
   return (dispatch ) => {
@@ -103,6 +116,7 @@ export function organizeDicTypeSelect() {
   }
 }
 
+/* 获取字典类型下拉数据 */
 function getDicTypeSelect(dispatch){
   fetch('api/dics/total')
     .then(response => response.json())
@@ -125,5 +139,14 @@ function updateDicTypeSelectOptions(data){
   return {
     type: 'DIC_SELECT_TYPE',
     data: typeArray
+  }
+}
+
+/* 改变modal框类型：新增or编辑 */
+export function changeModalType(nextType, data) {
+  return {
+    type: 'CHANGE_MODAL_TYPE',
+    nextType: nextType,
+    data: data
   }
 }

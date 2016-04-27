@@ -7,7 +7,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="main-footer">
+      <footer className="main-footer" style={{position: 'absolute', bottom: 0, width: '100%'}}>
         <strong>&copy; 2014-2015 </strong> 万达信息股份有限公司
       </footer>
     )

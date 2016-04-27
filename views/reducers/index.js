@@ -1,5 +1,6 @@
 const initialState = {
   selectedMenu: 1,
+  currentTable: 1,
   menus: [{
     index: 0,
     name: '资源管理'
@@ -7,26 +8,15 @@ const initialState = {
     index: 1,
     name: '字典管理'
   }],
-  currentTable: 1,
   tables: [{
     type: 0,
     name: 'asset',
     url: '/api/assets',
     saveUrl: '/api/assets',
     deleteUrl: '/api/assets/',
-    params: {},
     header: ['服务器名称', '服务器IP', '所属节点', '类型', '负责人', '状态', '应用部署信息', '操作'],
     colname: ['name', 'ip', 'parentNode', 'type', 'admin', 'state', 'appsInfo', 'aid'],
-    item: [],
-    options: [{
-      type: '更新状态'
-    }, {
-      type: '详情'
-    }, {
-      type: '编辑'
-    }, {
-      type: '删除'
-    }]
+    item: []
   },{
     type: 1,
     searchOptions:[],
@@ -34,22 +24,18 @@ const initialState = {
     url: '/api/dics/total',
     saveUrl: '/api/dics',
     deleteUrl: '/api/dics/',
-    params: {},
     header: ['字典类型', '字典码', '字典值', '操作'],
     colname: ['type', 'code', 'value', 'did'],
-    item: [],
-    options: [{
-      type: '编辑'
-    }, {
-      type: '删除'
-    }]
+    item: []
   }],
   ifModal: false,
   modalType: 'new',
-  selectDicTypes: []
+  selectDicTypes: [],
+  modalShowData: {}
 }
 
 export default function app(state = initialState, action) {
+  
   switch (action.type) {
     case 'RECEIVE_TABLE_SUCCESS':
       const index = action.index;
@@ -78,6 +64,12 @@ export default function app(state = initialState, action) {
     case 'DIC_SELECT_TYPE':
       return Object.assign({}, state, {
         selectDicTypes: action.data
+      })
+    case 'CHANGE_MODAL_TYPE':
+      return Object.assign({}, state, {
+        modalType: action.nextType,
+        ifModal: true,
+        modalShowData: action.data
       })
     default:
       return state

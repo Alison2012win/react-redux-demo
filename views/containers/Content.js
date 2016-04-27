@@ -20,18 +20,14 @@ class Content extends Component {
       case 0:
         return (
           <div>
-            <Assets 
-              tableData={tableData}
-            />
+            <Assets />
           </div>
         )
         break;
       case 1:
         return (
           <div>
-            <Dics 
-              tableData={tableData}
-            />
+            <Dics tableData={tableData} />
           </div>
         )
         break;

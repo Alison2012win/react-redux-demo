@@ -6,7 +6,7 @@ class Table extends Component {
   }
 
   render() {
-    const { tableData, handleDelete } = this.props
+    const { tableData, handleDelete, handleModify, tableType } = this.props
 
     const headerHTML = tableData.header.map(item => {
       return (
@@ -17,16 +17,15 @@ class Table extends Component {
     const bodyHTML = tableData.item.map(item => {
       const tdHTML = tableData.colname.map(col => {
         if(tableData.colname.indexOf(col) == tableData.colname.length-1){
-          const optionHTML = tableData.options.map(option => {
-            return (
-              <a onClick={() => handleDelete(item[col])}>{option.type}&nbsp;</a>
-            )
-          })
-          return (
-            <td>
-              {optionHTML}
-            </td>
-          )
+          switch (tableType) {
+            case 'dic':
+              return (
+                <td>
+                  <a onClick={() => handleModify(item)}>编辑&nbsp;</a>
+                  <a onClick={() => handleDelete(item[col])}>删除</a>
+                </td>
+              )
+          }
         } else {
           return (
             <td>{item[col]}</td>
