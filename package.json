@@ -4,7 +4,7 @@
     "description": "Redux example",
     "scripts": {
         "start": "node server.js",
-	    "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
+	    "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
 	    "test:watch": "npm test -- --watch"
     },
     "dependencies": {
@@ -16,7 +16,7 @@
 	    "react": "^0.14.7",
 	    "react-dom": "^0.14.7",
 	    "react-redux": "^4.2.1",
-	    "redux": "^3.2.1",
+	    "redux": "*",
 	    "redux-logger": "^2.4.0",
     	"redux-thunk": "^1.0.3",
         "express-session": "~1.11.3",
@@ -41,6 +41,7 @@
 	    "expect": "^1.8.0",
 	    "express": "^4.13.3",
 	    "jsdom": "^5.6.1",
+	    "chai": "^3.5.0",
 	    "mocha": "^2.2.5",
 	    "node-libs-browser": "^0.5.2",
 	    "raw-loader": "^0.5.1",
