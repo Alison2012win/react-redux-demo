@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getTableData, saveFetch, deleteFetch } from '../actionCreators'
+import { getTableData } from '../actionCreators'
 import Assets from '../components/pages/Assets'
 import Dics from '../components/pages/Dics'
 
